@@ -16,7 +16,7 @@ class Webservice {
     
     
     func getTopNews(country: String, completion: @escaping ((News?) -> Void)){
-        guard let url = URL(string: "http://newsapi.org/v2/top-headlines?country=\(country)&apiKey=\(self.APIkey)&pageSize=5") else {
+        guard let url = URL(string: "http://newsapi.org/v2/top-headlines?country=\(country)&apiKey=\(self.APIkey)&pageSize=10") else {
                    fatalError("URL is not correct")
                }
         self.getApi(url: url, completion: completion)

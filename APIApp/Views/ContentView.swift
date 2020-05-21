@@ -16,7 +16,7 @@ enum Tab: Int {
 
 struct ContentView: View {
     
-    @State var selectedTab = Tab.businessNews
+    @State var selectedTab = Tab.worldNews
     
     init() {
         UITabBar.appearance().unselectedItemTintColor = UIColor.black

@@ -14,6 +14,10 @@ struct AppleNews: View {
     
     @ObservedObject var stockListViewModel = StockListViewModel()
     
+    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     init() {
         UINavigationBar.appearance().backgroundColor = UIColor.red
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -27,19 +31,47 @@ struct AppleNews: View {
     }
     
     
-    
+    @ViewBuilder
     var body: some View {
         NavigationView{
             VStack{
+
                 ScrollView(.horizontal){
                     HStack{
-                        ForEach(0..<5){ index in
+                        ForEach(0 ..< self.topItemNumbers()){ index in
                             NavigationLink(destination: LazyView(NewsItemView(model: WebViewModel(link: self.getTopItemURL(index: index)), item: self.getTopItem(index: index)))) {
-                                
-                                NewsTopItemCell(item:self.getTopItem(index: index))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                    .padding([.top, .bottom, .leading], 8)
+                                HStack{
+                                   if self.horizontalSizeClass == .compact {
+                                    NewsTopItemCell(item:self.getTopItem(index: index))
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                        .padding([.top, .bottom, .leading], 8)
+
+                                    } else {
+                                        NewsTopItemCell(item:self.getTopItem(index: index), supportSizeClass: true)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                            .padding([.top, .bottom, .leading], 8)
+                                        
+                                        NewsTopItemCell(item:self.getTopItem(index: index + self.topItemNumbers()), supportSizeClass: true)
+                                            .fixedSize(horizontal: false, vertical: true)
+                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                            .padding([.top, .bottom, .leading], 8)
+
+                                    }
+
+//                                    NewsTopItemCell(item:self.getTopItem(index: index))
+//                                        .fixedSize(horizontal: false, vertical: true)
+//                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+//                                        .padding([.top, .bottom, .leading], 8)
+//                                    self.horizontalSizeClass == .regular{
+//                                        NewsTopItemCell(item:self.getTopItem(index: index))
+//                                            .fixedSize(horizontal: false, vertical: true)
+//                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+//                                            .padding([.top, .bottom, .leading], 8)
+//
+//                                    }
+                                }
                                 
                             }
                                 .buttonStyle(PlainButtonStyle()) //Navigation Link Issue with SwiftUI --> https://forums.developer.apple.com/thread/119809
@@ -48,7 +80,7 @@ struct AppleNews: View {
                 }
                 .frame(height: 220)
                 .onAppear(perform: fetchTop)
-                
+
                 List {
                     Section(header:WorldNewsListHeader())
                     {
@@ -64,7 +96,16 @@ struct AppleNews: View {
                 
             .navigationBarTitle(Text("News App")
             .foregroundColor(Color.white))
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    func topItemNumbers() -> Int{
+//        if self.horizontalSizeClass == .compact{
+//            return 5
+//        }
+//        return 10
+        return 5
+
     }
     
     func getTopItem(index: Int) -> NewsArticleViewModel?{

@@ -62,9 +62,9 @@ struct BusinessNews: View {
                     .onAppear(perform: fetch)
             }
                 
-            .navigationBarTitle(Text("News App")
+            .navigationBarTitle(Text("Business App")
             .foregroundColor(Color.white))
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
     
     func getTopItem(index: Int) -> NewsArticleViewModel?{

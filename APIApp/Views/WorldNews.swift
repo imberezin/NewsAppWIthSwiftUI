@@ -30,41 +30,13 @@ struct WorldNews: View {
     // context.coordinator.configureRefreshControl(for: tableViewController.tableView)
     var body: some View {
         NavigationView{
-            VStack{
-                ScrollView(.horizontal){
-                    HStack{
-                        ForEach(0..<5){ index in
-                            NavigationLink(destination: LazyView(NewsItemView(model: WebViewModel(link: self.getTopItemURL(index: index)), item: self.getTopItem(index: index)))) {
-                                
-                                NewsTopItemCell(item:self.getTopItem(index: index))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                    .padding([.top, .bottom, .leading], 8)
-                                
-                            }
-                                .buttonStyle(PlainButtonStyle()) //Navigation Link Issue with SwiftUI --> https://forums.developer.apple.com/thread/119809
-                        }
-                    }
-                }
-                .frame(height: 220)
-                .onAppear(perform: fetchTop)
-                
-                List {
-                    Section(header:WorldNewsListHeader())
-                    {
-                        ForEach(self.stockListViewModel.news) { news in
-                            NewsItemRow(item: news)
-                        }
-                    }
-                }
-                .padding(.top, -8)
-                    .padding(.trailing, -32.0/*-32.0*/)  //workaround to hide NavigationLink Arrow -> https://stackoverflow.com/a/56586580/1571228
-                    .onAppear(perform: fetch)
-            }
+            
+            PhotoGridScreen(stockListViewModel: stockListViewModel).onAppear(perform: fetch)
                 
             .navigationBarTitle(Text("World News")
             .foregroundColor(Color.white))
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
+
     }
     
     func getTopItem(index: Int) -> NewsArticleViewModel?{

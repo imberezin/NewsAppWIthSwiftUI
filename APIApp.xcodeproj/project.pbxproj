@@ -27,6 +27,8 @@
 		B7E4D4BE23FD324700E07795 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E4D4BD23FD324700E07795 /* WebViewModel.swift */; };
 		B7E4D4C023FD327F00E07795 /* SwiftUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E4D4BF23FD327F00E07795 /* SwiftUIWebView.swift */; };
 		B7E4D4C423FD336100E07795 /* NewsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E4D4C323FD336100E07795 /* NewsItemView.swift */; };
+		B7FB384E23FE705C00AC7609 /* ASCollectionView in Frameworks */ = {isa = PBXBuildFile; productRef = B7FB384D23FE705C00AC7609 /* ASCollectionView */; };
+		B7FB385023FE74B600AC7609 /* PhotoGridScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FB384F23FE74B600AC7609 /* PhotoGridScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,7 @@
 		B7E4D4BD23FD324700E07795 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		B7E4D4BF23FD327F00E07795 /* SwiftUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIWebView.swift; sourceTree = "<group>"; };
 		B7E4D4C323FD336100E07795 /* NewsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemView.swift; sourceTree = "<group>"; };
+		B7FB384F23FE74B600AC7609 /* PhotoGridScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7E4D4BA23FC345500E07795 /* URLImage in Frameworks */,
+				B7FB384E23FE705C00AC7609 /* ASCollectionView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B7E4D49F23FC129600E07795 /* ContentView.swift */,
+				B7FB384F23FE74B600AC7609 /* PhotoGridScreen.swift */,
 				B78783E023FD41F900FA9736 /* PulsingLoader.swift */,
 				B7E4D4C323FD336100E07795 /* NewsItemView.swift */,
 				B78783E223FD4A0800FA9736 /* NewsItemRow.swift */,
@@ -174,6 +179,7 @@
 			name = APIApp;
 			packageProductDependencies = (
 				B7E4D4B923FC345500E07795 /* URLImage */,
+				B7FB384D23FE705C00AC7609 /* ASCollectionView */,
 			);
 			productName = APIApp;
 			productReference = B7E4D49823FC129600E07795 /* APIApp.app */;
@@ -205,6 +211,7 @@
 			mainGroup = B7E4D48F23FC129600E07795;
 			packageReferences = (
 				B7E4D4B823FC345500E07795 /* XCRemoteSwiftPackageReference "url-image" */,
+				B7FB384C23FE705C00AC7609 /* XCRemoteSwiftPackageReference "ASCollectionView" */,
 			);
 			productRefGroup = B7E4D49923FC129600E07795 /* Products */;
 			projectDirPath = "";
@@ -236,6 +243,7 @@
 				B7E4D4C423FD336100E07795 /* NewsItemView.swift in Sources */,
 				B7E4D4B723FC1C5200E07795 /* NewsArticleViewModel.swift in Sources */,
 				B78783E523FD647100FA9736 /* NewsTopItemCell.swift in Sources */,
+				B7FB385023FE74B600AC7609 /* PhotoGridScreen.swift in Sources */,
 				B7E4D4C023FD327F00E07795 /* SwiftUIWebView.swift in Sources */,
 				B7E4D49C23FC129600E07795 /* AppDelegate.swift in Sources */,
 				B78783E323FD4A0800FA9736 /* NewsItemRow.swift in Sources */,
@@ -452,6 +460,14 @@
 				minimumVersion = 0.9.10;
 			};
 		};
+		B7FB384C23FE705C00AC7609 /* XCRemoteSwiftPackageReference "ASCollectionView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apptekstudios/ASCollectionView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -459,6 +475,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7E4D4B823FC345500E07795 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
+		};
+		B7FB384D23FE705C00AC7609 /* ASCollectionView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7FB384C23FE705C00AC7609 /* XCRemoteSwiftPackageReference "ASCollectionView" */;
+			productName = ASCollectionView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -12,17 +12,29 @@ import URLImage
 struct NewsTopItemCell: View {
     
     var item: NewsArticleViewModel?
-    let imageWidth: CGFloat = UIScreen.main.bounds.width - 16
-    let imageHeight: CGFloat = CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 < 200 ? CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 : 200.0
+    var imageWidth: CGFloat = UIScreen.main.bounds.width - 16
+    var imageHeight: CGFloat = CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 < 200 ? CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 : 200.0
     
+    let supportSizeClass: Bool
     
-    /*
-       NavigationLink(destination: LazyView(NewsItemView(model: WebViewModel(link: self.item!.urlToImage!), item: self.item))) {
-     */
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
+    init(item: NewsArticleViewModel?, supportSizeClass: Bool = false){
+        self.item = item
+        self.supportSizeClass = supportSizeClass
+        if !supportSizeClass || self.horizontalSizeClass == .compact{
+             imageWidth = UIScreen.main.bounds.width - 16
+             imageHeight = CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 < 200 ? CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 : 200.0
+        } else if supportSizeClass{
+            imageWidth = (UIScreen.main.bounds.width - 32)/2
+            imageHeight = CGFloat(imageWidth)*9.0/16.0 < 200 ? CGFloat(UIScreen.main.bounds.width - 16)*9.0/16.0 : 200.0
+        }
+    }
+
     @ViewBuilder // https://stackoverflow.com/a/57323368/1571228
     var body: some View {
         ZStack{
-            Rectangle().fill(Color.white).frame(width:UIScreen.main.bounds.width - 16, height: 200)
+            Rectangle().fill(Color.white).frame(width:imageWidth, height: 200)
             if item != nil{
               
 
@@ -46,7 +58,7 @@ struct NewsTopItemCell: View {
 
 struct NewsTopItemCell_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTopItemCell()
+        NewsTopItemCell(item: nil)
     }
 }
 
